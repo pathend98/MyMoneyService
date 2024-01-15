@@ -1,10 +1,10 @@
-package dev.hend.mymoneyservice;
+package dev.hend.MyMoneyService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MymoneyserviceApplicationTests {
+class MyMoneyServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

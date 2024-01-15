@@ -1,13 +1,13 @@
-package dev.hend.mymoneyservice;
+package dev.hend.MyMoneyService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MymoneyserviceApplication {
+public class MyMoneyServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MymoneyserviceApplication.class, args);
+		SpringApplication.run(MyMoneyServiceApplication.class, args);
 	}
 
 }
