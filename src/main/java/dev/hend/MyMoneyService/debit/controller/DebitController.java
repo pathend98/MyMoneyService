@@ -23,12 +23,12 @@ public class DebitController {
 
     private final DebitService debitService;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DebitPayment> getAllDebitPayments() {
         return debitService.getAllDebitPayments();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public DebitPayment getDebitPaymentById(@PathVariable("id") UUID id) {
         return debitService.getDebitPaymentById(id);
     }
