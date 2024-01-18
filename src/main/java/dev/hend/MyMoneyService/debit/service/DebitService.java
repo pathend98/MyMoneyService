@@ -15,20 +15,20 @@ import lombok.RequiredArgsConstructor;
 public class DebitService {
 
     private final DebitPaymentRepository debitPaymentRepository;
-    
 
     public List<DebitPayment> getAllDebitPayments() {
-        return StreamSupport.stream(debitPaymentRepository.findAll().spliterator(), false).toList();
+        return StreamSupport.stream(debitPaymentRepository.findAll().spliterator(), false)
+                .toList();
     }
 
     public DebitPayment getDebitPaymentById(UUID id) {
         return debitPaymentRepository.findById(id).get();
     }
-    
+
     public DebitPayment createDebitPayment(DebitPayment debitPayment) {
         return debitPaymentRepository.save(debitPayment);
     }
-    
+
     public void deleteDebitPaymentById(UUID id) {
         debitPaymentRepository.deleteById(id);
     }
