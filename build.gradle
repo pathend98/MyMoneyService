@@ -53,7 +53,7 @@ tasks.named('test') {
 task('addPreCommit') {
 	println('Copying pre-commit hook script...')
 	exec{
-		commandLine('cp', './.hooks/pre-commit', '.git/hooks/pre-commit')
+		commandLine('cp', '.hooks/pre-commit', '.git/hooks/pre-commit')
 	}
 	println("Added pre-commit hook.")
 }
