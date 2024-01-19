@@ -1,0 +1,54 @@
+#!/bin/bash
+
+echo "Checking code format..."
+
+staged_files=()
+
+# Extensions for the files which might need formatting.
+extensions="\.\(java\|gradle\)$"
+
+# Store a copy of the unstaged version of each file and overwrite the original with
+# the staged version.
+staged_files+=(
+    $(git diff --cached --name-only --diff-filter=AMCR | grep "$extensions" | while read file; do
+        mv "$file" "$file.tmp"
+        git show :"$file" > "$file"
+        echo "$file"
+    done)
+)
+
+# Check to see if code is formatted correctly
+./gradlew spotlessCheck >/dev/null 2>&1
+
+correctly_formatted=$?
+if [ $correctly_formatted -eq 0 ]; then
+    echo -e "\e[32mStaged changes are formatted correctly.\e[0m"
+    error_on_reformat=0
+else
+    # Reformat staged version of files
+    ./gradlew spotlessApply >/dev/null 2>&1
+    error_on_reformat=$?
+
+    if [ $error_on_reformat -eq 0 ]; then
+        echo -e "\e[33mStaged changes have been reformatted and staged in the commit.\e[0m"
+    else
+        echo -e "\e[31mStaged changes were not formatted correctly and could not be reformatted. Aborting commit...\e[0m"
+    fi
+fi
+
+# Stage formatted files and restore unstaged files to their state
+# prior to commit.
+for file in ${staged_files[@]}; do
+    if [ $error_on_reformat -eq 0 ]; then 
+        git add "$file"
+    fi
+
+    mv "$file.tmp" "$file"
+done
+
+# Apply formatting to unstaged files.
+if [ $error_on_reformat -eq 0 ] && [ $correctly_formatted -ne 0 ]; then
+    ./gradlew spotlessApply >/dev/null 2>&1;
+fi
+
+exit $error_on_reformat

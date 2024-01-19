@@ -35,9 +35,9 @@ dependencies {
 spotless {
 	java {
 		palantirJavaFormat('2.39.0')
+		formatAnnotations()
 		removeUnusedImports()
 		importOrder('java|jakarta', 'org.springframework', '', '\\#')
-		formatAnnotations()
 	}
 
 	groovyGradle {
@@ -48,4 +48,12 @@ spotless {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task('addPreCommit') {
+	println('Copying pre-commit hook script...')
+	exec{
+		commandLine('cp', './.hooks/pre-commit', '.git/hooks/pre-commit')
+	}
+	println("Added pre-commit hook.")
 }
