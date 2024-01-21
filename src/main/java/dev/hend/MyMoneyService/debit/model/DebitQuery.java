@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class DebitPaymentQuery {
+public class DebitQuery {
 
     private LocalDate startDate;
     private LocalDate endDate;

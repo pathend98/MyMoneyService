@@ -7,43 +7,43 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
-import dev.hend.MyMoneyService.debit.exception.DebitPaymentNotFoundException;
-import dev.hend.MyMoneyService.debit.model.DebitPayment;
-import dev.hend.MyMoneyService.debit.model.DebitPaymentQuery;
-import dev.hend.MyMoneyService.debit.repository.DebitPaymentRepository;
+import dev.hend.MyMoneyService.debit.exception.DebitNotFoundException;
+import dev.hend.MyMoneyService.debit.model.Debit;
+import dev.hend.MyMoneyService.debit.model.DebitQuery;
+import dev.hend.MyMoneyService.debit.repository.DebitRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class DebitService {
 
-    private final DebitPaymentRepository debitPaymentRepository;
+    private final DebitRepository debitRepository;
 
-    public List<DebitPayment> getAllDebitPayments() {
-        return StreamSupport.stream(debitPaymentRepository.findAll().spliterator(), false)
+    public List<Debit> getAllDebitPayments() {
+        return StreamSupport.stream(debitRepository.findAll().spliterator(), false)
                 .toList();
     }
 
-    public DebitPayment getDebitPaymentById(UUID id) {
-        Optional<DebitPayment> result = debitPaymentRepository.findById(id);
+    public Debit getDebitPaymentById(UUID id) {
+        Optional<Debit> result = debitRepository.findById(id);
 
         if (result.isEmpty()) {
-            throw new DebitPaymentNotFoundException("Debit Payment", id.toString());
+            throw new DebitNotFoundException("Debit", id.toString());
         }
 
         return result.get();
     }
 
-    public DebitPayment createDebitPayment(DebitPayment debitPayment) {
-        return debitPaymentRepository.save(debitPayment);
+    public Debit createDebitPayment(Debit debitPayment) {
+        return debitRepository.save(debitPayment);
     }
 
-    public List<DebitPayment> queryDebitPayments(DebitPaymentQuery query) {
-        return debitPaymentRepository.findAllByDateGreaterThanEqualAndDateLessThanEqual(
+    public List<Debit> queryDebits(DebitQuery query) {
+        return debitRepository.findAllByDateGreaterThanEqualAndDateLessThanEqual(
                 query.getStartDate(), query.getEndDate());
     }
 
-    public void deleteDebitPaymentById(UUID id) {
-        debitPaymentRepository.deleteById(id);
+    public void deleteDebitById(UUID id) {
+        debitRepository.deleteById(id);
     }
 }

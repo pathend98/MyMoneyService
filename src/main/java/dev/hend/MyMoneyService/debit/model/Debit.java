@@ -14,12 +14,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "debit_payment")
+@Table(name = "debit")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class DebitPayment {
+public class Debit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

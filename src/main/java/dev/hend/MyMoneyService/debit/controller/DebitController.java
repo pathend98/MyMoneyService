@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.hend.MyMoneyService.debit.model.DebitPayment;
-import dev.hend.MyMoneyService.debit.model.DebitPaymentQuery;
+import dev.hend.MyMoneyService.debit.model.Debit;
+import dev.hend.MyMoneyService.debit.model.DebitQuery;
 import dev.hend.MyMoneyService.debit.service.DebitService;
 import lombok.RequiredArgsConstructor;
 
@@ -25,30 +25,30 @@ public class DebitController {
     private final DebitService debitService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DebitPayment> getAllDebitPayments() {
-        return debitService.getAllDebitPayments();
+    public List<Debit> getAllDebitPayments() {
+        return debitService.getAllDebits();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public DebitPayment getDebitPaymentById(@PathVariable("id") UUID id) {
-        return debitService.getDebitPaymentById(id);
+    public Debit getDebitPaymentById(@PathVariable("id") UUID id) {
+        return debitService.getDebitById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public DebitPayment createDebitPayment(@RequestBody DebitPayment debitPayment) {
-        return debitService.createDebitPayment(debitPayment);
+    public Debit createDebitPayment(@RequestBody DebitPayment debitPayment) {
+        return debitService.createDebit(debitPayment);
     }
 
     @PostMapping(
             value = "/query",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DebitPayment> queryDebitPayments(@RequestBody DebitPaymentQuery query) {
-        return debitService.queryDebitPayments(query);
+    public List<Debit> queryDebitPayments(@RequestBody DebitQuery query) {
+        return debitService.queryDebits(query);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDebitPaymentById(@PathVariable("id") UUID id) {
-        debitService.deleteDebitPaymentById(id);
+    public void deleteDebitById(@PathVariable("id") UUID id) {
+        debitService.deleteDebitById(id);
     }
 }

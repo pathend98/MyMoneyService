@@ -10,7 +10,7 @@
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
 	<changeSet id="1" author="pathend98">
-		<createTable tableName="debit_payment">
+		<createTable tableName="debit">
 			<column name="id" type="uuid" value="uid.uuid_generate_v4()">
 				<constraints primaryKey="true" nullable="false"
 					unique="true" />
