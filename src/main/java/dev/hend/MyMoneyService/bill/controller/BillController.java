@@ -26,7 +26,7 @@ public class BillController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Bill createBill(@RequestBody Bill bill) {
+    public Bill upsertBill(@RequestBody Bill bill) {
         return billService.upsertBill(bill);
     }
 }

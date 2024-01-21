@@ -1,4 +1,4 @@
-package dev.hend.MyMoneyService.debit.controller;
+package dev.hend.MyMoneyService.deposit.controller;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,33 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.hend.MyMoneyService.debit.model.Debit;
-import dev.hend.MyMoneyService.debit.model.DebitQuery;
-import dev.hend.MyMoneyService.debit.service.DebitService;
+import dev.hend.MyMoneyService.deposit.model.Deposit;
+import dev.hend.MyMoneyService.deposit.model.DepositQuery;
+import dev.hend.MyMoneyService.deposit.service.DepositService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/debit")
-public class DebitController {
+@RequestMapping("/deposit")
+public class DepositController {
 
-    private final DebitService debitService;
+    private final DepositService depositService;
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Debit upsertDebit(@RequestBody Debit debit) {
-        return debitService.upsertDebit(debit);
+    public Deposit upsertDeposit(@RequestBody Deposit deposit) {
+        return depositService.upsertDeposit(deposit);
     }
 
     @PostMapping(
             value = "/query",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Debit> queryDebits(@RequestBody DebitQuery query) {
-        return debitService.queryDebits(query);
+    public List<Deposit> queryDeposits(@RequestBody DepositQuery query) {
+        return depositService.queryDeposits(query);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDebitById(@PathVariable("id") UUID id) {
-        debitService.deleteDebitById(id);
+    public void deleteDepositById(@PathVariable UUID id) {
+        depositService.deleteDepositById(id);
     }
 }

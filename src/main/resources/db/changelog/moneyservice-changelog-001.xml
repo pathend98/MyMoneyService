@@ -75,4 +75,23 @@
 			constraintName="fk_bill_payment_bill" referencedColumnNames="id"
 			referencedTableName="bill" />
 	</changeSet>
+
+	<changeSet id="4" author="pathend98">
+		<createTable tableName="deposit">
+			<column name="id" type="uuid" value="uid.uuid_generate_v4()">
+				<constraints primaryKey="true" 
+					nullable="false"
+					unique="true" />
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="value" type="real">
+				<constraints nullable="false" />
+			</column>
+			<column name="date" type="date">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet> 
 </databaseChangeLog>

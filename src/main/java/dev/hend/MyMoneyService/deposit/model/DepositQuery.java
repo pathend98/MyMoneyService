@@ -1,4 +1,4 @@
-package dev.hend.MyMoneyService.billpayment.model;
+package dev.hend.MyMoneyService.deposit.model;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class BillPaymentQuery {
+public class DepositQuery {
 
     private LocalDate startDate;
     private LocalDate endDate;

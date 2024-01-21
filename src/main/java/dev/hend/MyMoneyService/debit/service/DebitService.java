@@ -1,9 +1,7 @@
 package dev.hend.MyMoneyService.debit.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
@@ -13,28 +11,19 @@ import dev.hend.MyMoneyService.debit.model.DebitQuery;
 import dev.hend.MyMoneyService.debit.repository.DebitRepository;
 import lombok.RequiredArgsConstructor;
 
+import static java.util.Objects.nonNull;
+
 @RequiredArgsConstructor
 @Service
 public class DebitService {
 
     private final DebitRepository debitRepository;
 
-    public List<Debit> getAllDebits() {
-        return StreamSupport.stream(debitRepository.findAll().spliterator(), false)
-                .toList();
-    }
-
-    public Debit getDebitById(UUID id) {
-        Optional<Debit> result = debitRepository.findById(id);
-
-        if (result.isEmpty()) {
-            throw new DebitNotFoundException("Debit", id.toString());
+    public Debit upsertDebit(Debit debitPayment) {
+        if (nonNull(debitPayment.getId())
+                && debitRepository.findById(debitPayment.getId()).isEmpty()) {
+            throw new DebitNotFoundException("Debit", debitPayment.getId().toString());
         }
-
-        return result.get();
-    }
-
-    public Debit createDebit(Debit debitPayment) {
         return debitRepository.save(debitPayment);
     }
 
