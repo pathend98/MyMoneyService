@@ -45,6 +45,34 @@
 			<column name="day_of_month" type="smallint">
 				<constraints nullable="false" />
 			</column>
+			<column name="active" type="boolean">
+				<constraints nullable="false" />
+			</column>
 		</createTable>
+	</changeSet>
+
+	<changeSet id="3" author="pathend98">
+		<createTable tableName="bill_payment">
+			<column name="id" type="uuid" value="uid.uuid_generate_v4()">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="bill_id" type="uuid">
+				<constraints nullable="false" />
+			</column>
+			<column name="value" type="real">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_of_bill" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="paid" type="boolean">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint
+			baseColumnNames="bill_id" baseTableName="bill_payment"
+			constraintName="fk_bill_payment_bill" referencedColumnNames="id"
+			referencedTableName="bill" />
 	</changeSet>
 </databaseChangeLog>

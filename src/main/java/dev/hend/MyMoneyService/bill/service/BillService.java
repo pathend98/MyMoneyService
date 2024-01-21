@@ -1,14 +1,16 @@
 package dev.hend.MyMoneyService.bill.service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
+import dev.hend.MyMoneyService.bill.exception.BillNotFoundException;
 import dev.hend.MyMoneyService.bill.model.Bill;
 import dev.hend.MyMoneyService.bill.repository.BillRepository;
 import lombok.RequiredArgsConstructor;
+
+import static java.util.Objects.nonNull;
 
 @RequiredArgsConstructor
 @Service
@@ -21,11 +23,11 @@ public class BillService {
                 .toList();
     }
 
-    public Bill createBill(Bill bill) {
-        return billRepository.save(bill);
-    }
+    public Bill upsertBill(Bill bill) {
+        if (nonNull(bill.getId()) && billRepository.findById(bill.getId()).isEmpty()) {
+            throw new BillNotFoundException("Bill", bill.getId().toString());
+        }
 
-    public void deleteBillById(UUID id) {
-        billRepository.deleteById(id);
+        return billRepository.save(bill);
     }
 }
