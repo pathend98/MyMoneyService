@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.hend.MyMoneyService.debit.model.DebitPayment;
+import dev.hend.MyMoneyService.debit.model.DebitPaymentQuery;
 import dev.hend.MyMoneyService.debit.service.DebitService;
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +37,14 @@ public class DebitController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public DebitPayment createDebitPayment(@RequestBody DebitPayment debitPayment) {
         return debitService.createDebitPayment(debitPayment);
+    }
+
+    @PostMapping(
+            value = "/query",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DebitPayment> queryDebitPayments(@RequestBody DebitPaymentQuery query) {
+        return debitService.queryDebitPayments(query);
     }
 
     @DeleteMapping("/{id}")

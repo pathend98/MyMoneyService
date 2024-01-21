@@ -7,6 +7,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 
 import dev.hend.MyMoneyService.debit.model.DebitPayment;
+import dev.hend.MyMoneyService.debit.model.DebitPaymentQuery;
 import dev.hend.MyMoneyService.debit.repository.DebitPaymentRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +28,11 @@ public class DebitService {
 
     public DebitPayment createDebitPayment(DebitPayment debitPayment) {
         return debitPaymentRepository.save(debitPayment);
+    }
+
+    public List<DebitPayment> queryDebitPayments(DebitPaymentQuery query) {
+        return debitPaymentRepository.findAllByDateGreaterThanEqualAndDateLessThanEqual(
+                query.getStartDate(), query.getEndDate());
     }
 
     public void deleteDebitPaymentById(UUID id) {
