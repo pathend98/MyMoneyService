@@ -26,7 +26,7 @@ public class DebitPayment {
     private UUID id;
 
     private String name;
-    private float value;
+    private Float value;
     private String category;
     private LocalDate date;
 }

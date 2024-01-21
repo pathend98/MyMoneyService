@@ -25,6 +25,6 @@ public class Bill {
     private UUID id;
 
     private String name;
-    private float value;
-    private int dayOfMonth;
+    private Float value;
+    private Integer dayOfMonth;
 }
