@@ -1,11 +1,13 @@
 package dev.hend.MyMoneyService.debit.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
+import dev.hend.MyMoneyService.debit.exception.DebitPaymentNotFoundException;
 import dev.hend.MyMoneyService.debit.model.DebitPayment;
 import dev.hend.MyMoneyService.debit.model.DebitPaymentQuery;
 import dev.hend.MyMoneyService.debit.repository.DebitPaymentRepository;
@@ -23,7 +25,13 @@ public class DebitService {
     }
 
     public DebitPayment getDebitPaymentById(UUID id) {
-        return debitPaymentRepository.findById(id).get();
+        Optional<DebitPayment> result = debitPaymentRepository.findById(id);
+
+        if (result.isEmpty()) {
+            throw new DebitPaymentNotFoundException("Debit Payment", id.toString());
+        }
+
+        return result.get();
     }
 
     public DebitPayment createDebitPayment(DebitPayment debitPayment) {
