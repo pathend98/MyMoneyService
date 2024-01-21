@@ -19,12 +19,12 @@ public class DebitService {
 
     private final DebitRepository debitRepository;
 
-    public List<Debit> getAllDebitPayments() {
+    public List<Debit> getAllDebits() {
         return StreamSupport.stream(debitRepository.findAll().spliterator(), false)
                 .toList();
     }
 
-    public Debit getDebitPaymentById(UUID id) {
+    public Debit getDebitById(UUID id) {
         Optional<Debit> result = debitRepository.findById(id);
 
         if (result.isEmpty()) {
@@ -34,13 +34,12 @@ public class DebitService {
         return result.get();
     }
 
-    public Debit createDebitPayment(Debit debitPayment) {
+    public Debit createDebit(Debit debitPayment) {
         return debitRepository.save(debitPayment);
     }
 
     public List<Debit> queryDebits(DebitQuery query) {
-        return debitRepository.findAllByDateGreaterThanEqualAndDateLessThanEqual(
-                query.getStartDate(), query.getEndDate());
+        return debitRepository.findAllByDateBetween(query.getStartDate(), query.getEndDate());
     }
 
     public void deleteDebitById(UUID id) {

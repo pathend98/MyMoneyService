@@ -25,25 +25,25 @@ public class DebitController {
     private final DebitService debitService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Debit> getAllDebitPayments() {
+    public List<Debit> getAllDebits() {
         return debitService.getAllDebits();
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Debit getDebitPaymentById(@PathVariable("id") UUID id) {
+    public Debit getDebitById(@PathVariable("id") UUID id) {
         return debitService.getDebitById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Debit createDebitPayment(@RequestBody DebitPayment debitPayment) {
-        return debitService.createDebit(debitPayment);
+    public Debit createDebit(@RequestBody Debit debit) {
+        return debitService.createDebit(debit);
     }
 
     @PostMapping(
             value = "/query",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Debit> queryDebitPayments(@RequestBody DebitQuery query) {
+    public List<Debit> queryDebits(@RequestBody DebitQuery query) {
         return debitService.queryDebits(query);
     }
 

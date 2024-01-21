@@ -12,5 +12,5 @@ import dev.hend.MyMoneyService.debit.model.Debit;
 @Repository
 public interface DebitRepository extends CrudRepository<Debit, UUID> {
 
-    List<Debit> findAllByDateGreaterThanEqualAndDateLessThanEqual(LocalDate startDate, LocalDate endDate);
+    List<Debit> findAllByDateBetween(LocalDate startDate, LocalDate endDate);
 }

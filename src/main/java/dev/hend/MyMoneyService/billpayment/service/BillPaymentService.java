@@ -19,8 +19,7 @@ public class BillPaymentService {
     private final BillPaymentRepository billPaymentRepository;
 
     public List<BillPayment> queryBillPayments(BillPaymentQuery query) {
-        return billPaymentRepository.findAllByDateOfBillGreaterThanEqualAndDateOfBillLessThanEqual(
-                query.getDateOfBillStart(), query.getDateOfBillEnd());
+        return billPaymentRepository.findAllByDateOfBillBetween(query.getDateOfBillStart(), query.getDateOfBillEnd());
     }
 
     public BillPayment upsertBillPayment(BillPayment billPayment) {
