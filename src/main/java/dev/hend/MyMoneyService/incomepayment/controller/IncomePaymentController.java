@@ -1,4 +1,4 @@
-package dev.hend.MyMoneyService.billpayment.controller;
+package dev.hend.MyMoneyService.incomepayment.controller;
 
 import java.util.List;
 
@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.hend.MyMoneyService.billpayment.model.BillPayment;
-import dev.hend.MyMoneyService.billpayment.model.BillPaymentQuery;
-import dev.hend.MyMoneyService.billpayment.service.BillPaymentService;
+import dev.hend.MyMoneyService.incomepayment.model.IncomePayment;
+import dev.hend.MyMoneyService.incomepayment.model.IncomePaymentQuery;
+import dev.hend.MyMoneyService.incomepayment.service.IncomePaymentService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/bill-payment")
-public class BillPaymentController {
+@RequestMapping("/income-payment")
+public class IncomePaymentController {
 
-    private final BillPaymentService billPaymentService;
+    private final IncomePaymentService incomePaymentService;
 
     @PostMapping(
             value = "/query",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<BillPayment> queryBillPayments(@RequestBody BillPaymentQuery query) {
-        return billPaymentService.queryBillPayments(query);
+    public List<IncomePayment> queryIncomePayments(@RequestBody IncomePaymentQuery query) {
+        return incomePaymentService.queryIncomePayments(query);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public BillPayment upsertBillPayment(@RequestBody BillPayment billPayment) {
-        return billPaymentService.upsertBillPayment(billPayment);
+    public IncomePayment upsertIncomePayment(@RequestBody IncomePayment incomePayment) {
+        return incomePaymentService.upsertIncomePayment(incomePayment);
     }
 }

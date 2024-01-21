@@ -1,6 +1,5 @@
-package dev.hend.MyMoneyService.billpayment.model;
+package dev.hend.MyMoneyService.income.model;
 
-import java.time.LocalDate;
 import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,19 +13,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "bill_payment")
+@Table(name = "income")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class BillPayment {
+public class Income {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID billId;
+    private String name;
     private Float value;
-    private LocalDate dateOfPayment;
-    private Boolean paid;
+    private Integer dayOfMonth;
+    private Boolean active;
 }

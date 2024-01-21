@@ -12,5 +12,5 @@ import dev.hend.MyMoneyService.billpayment.model.BillPayment;
 @Repository
 public interface BillPaymentRepository extends CrudRepository<BillPayment, UUID> {
 
-    List<BillPayment> findAllByDateOfBillBetween(LocalDate startDate, LocalDate endDate);
+    List<BillPayment> findAllByDateOfPaymentBetween(LocalDate startDate, LocalDate endDate);
 }

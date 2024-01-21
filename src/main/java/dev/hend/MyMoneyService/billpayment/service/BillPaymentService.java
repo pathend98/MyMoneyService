@@ -19,7 +19,7 @@ public class BillPaymentService {
     private final BillPaymentRepository billPaymentRepository;
 
     public List<BillPayment> queryBillPayments(BillPaymentQuery query) {
-        return billPaymentRepository.findAllByDateOfBillBetween(query.getStartDate(), query.getEndDate());
+        return billPaymentRepository.findAllByDateOfPaymentBetween(query.getStartDate(), query.getEndDate());
     }
 
     public BillPayment upsertBillPayment(BillPayment billPayment) {

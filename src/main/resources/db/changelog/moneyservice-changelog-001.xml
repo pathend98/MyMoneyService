@@ -62,7 +62,7 @@
 			<column name="value" type="real">
 				<constraints nullable="false" />
 			</column>
-			<column name="date_of_bill" type="date">
+			<column name="date_of_payment" type="date">
 				<constraints nullable="false" />
 			</column>
 			<column name="paid" type="boolean">
@@ -79,8 +79,7 @@
 	<changeSet id="4" author="pathend98">
 		<createTable tableName="deposit">
 			<column name="id" type="uuid" value="uid.uuid_generate_v4()">
-				<constraints primaryKey="true" 
-					nullable="false"
+				<constraints primaryKey="true" nullable="false"
 					unique="true" />
 			</column>
 			<column name="name" type="varchar(50)">
@@ -93,5 +92,49 @@
 				<constraints nullable="false" />
 			</column>
 		</createTable>
-	</changeSet> 
+	</changeSet>
+
+	<changeSet id="5" author="pathend98">
+		<createTable tableName="income">
+			<column name="id" type="uuid" value="uid.uuid_generate_v4()">
+				<constraints primaryKey="true" nullable="false"
+					unique="true" />
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="value" type="real">
+				<constraints nullable="false" />
+			</column>
+			<column name="day_of_month" type="smallint">
+				<constraints nullable="false" />
+			</column>
+			<column name="active" type="boolean">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createTable tableName="income_payment">
+			<column name="id" type="uuid" value="uid.uuid_generate_v4()">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="income_id" type="uuid">
+				<constraints nullable="false" />
+			</column>
+			<column name="value" type="real">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_of_payment" type="date">
+				<constraints nullable="false" />
+			</column>
+			<column name="paid" type="boolean">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint
+			baseColumnNames="income_id" baseTableName="income_payment"
+			constraintName="fk_income_payment_income" referencedColumnNames="id"
+			referencedTableName="income" />
+	</changeSet>
 </databaseChangeLog>
