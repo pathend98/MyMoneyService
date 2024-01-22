@@ -1,6 +1,7 @@
 package dev.hend.MyMoneyService.billpayment.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,10 @@ public class BillPaymentService {
     }
 
     public BillPayment upsertBillPayment(BillPayment billPayment) {
-        if (nonNull(billPayment.getId())
-                && billPaymentRepository.findById(billPayment.getId()).isEmpty()) {
-            throw new BillPaymentNotFoundException(
-                    "Bill Payment", billPayment.getId().toString());
+        UUID paymentId = billPayment.getId();
+
+        if (nonNull(paymentId) && billPaymentRepository.findById(paymentId).isEmpty()) {
+            throw new BillPaymentNotFoundException("Bill Payment", paymentId.toString());
         }
 
         return billPaymentRepository.save(billPayment);

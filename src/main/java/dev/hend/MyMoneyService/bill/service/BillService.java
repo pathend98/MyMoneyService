@@ -1,6 +1,7 @@
 package dev.hend.MyMoneyService.bill.service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
@@ -24,8 +25,10 @@ public class BillService {
     }
 
     public Bill upsertBill(Bill bill) {
-        if (nonNull(bill.getId()) && billRepository.findById(bill.getId()).isEmpty()) {
-            throw new BillNotFoundException("Bill", bill.getId().toString());
+        UUID billId = bill.getId();
+
+        if (nonNull(billId) && billRepository.findById(billId).isEmpty()) {
+            throw new BillNotFoundException("Bill", billId.toString());
         }
 
         return billRepository.save(bill);

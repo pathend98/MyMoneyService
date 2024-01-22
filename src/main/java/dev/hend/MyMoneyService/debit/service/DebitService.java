@@ -19,12 +19,14 @@ public class DebitService {
 
     private final DebitRepository debitRepository;
 
-    public Debit upsertDebit(Debit debitPayment) {
-        if (nonNull(debitPayment.getId())
-                && debitRepository.findById(debitPayment.getId()).isEmpty()) {
-            throw new DebitNotFoundException("Debit", debitPayment.getId().toString());
+    public Debit upsertDebit(Debit debit) {
+        UUID debitId = debit.getId();
+
+        if (nonNull(debitId) && debitRepository.findById(debitId).isEmpty()) {
+            throw new DebitNotFoundException("Debit", debitId.toString());
         }
-        return debitRepository.save(debitPayment);
+
+        return debitRepository.save(debit);
     }
 
     public List<Debit> queryDebits(DebitQuery query) {

@@ -1,6 +1,7 @@
 package dev.hend.MyMoneyService.incomepayment.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -23,10 +24,10 @@ public class IncomePaymentService {
     }
 
     public IncomePayment upsertIncomePayment(IncomePayment incomePayment) {
-        if (nonNull(incomePayment.getId())
-                && incomePaymentRepository.findById(incomePayment.getId()).isEmpty()) {
-            throw new IncomePaymentNotFoundException(
-                    "Income Payment", incomePayment.getId().toString());
+        UUID paymentId = incomePayment.getId();
+
+        if (nonNull(paymentId) && incomePaymentRepository.findById(paymentId).isEmpty()) {
+            throw new IncomePaymentNotFoundException("Income Payment", paymentId.toString());
         }
 
         return incomePaymentRepository.save(incomePayment);

@@ -24,9 +24,10 @@ public class DepositService {
     }
 
     public Deposit upsertDeposit(Deposit deposit) {
-        if (nonNull(deposit.getId())
-                && depositRepository.findById(deposit.getId()).isEmpty()) {
-            throw new DepositNotFoundException("Deposit", deposit.getId().toString());
+        UUID depositId = deposit.getId();
+
+        if (nonNull(depositId) && depositRepository.findById(depositId).isEmpty()) {
+            throw new DepositNotFoundException("Deposit", depositId.toString());
         }
 
         return depositRepository.save(deposit);
