@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,5 +29,7 @@ public class Debit {
     private String name;
     private Float value;
     private String category;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 }
