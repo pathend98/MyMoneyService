@@ -6,8 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import dev.hend.MyMoneyService.bill.model.Bill;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +27,9 @@ public class BillPayment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID billId;
+    @ManyToOne
+    private Bill bill;
+
     private Float value;
     private LocalDate dateOfPayment;
     private Boolean paid;

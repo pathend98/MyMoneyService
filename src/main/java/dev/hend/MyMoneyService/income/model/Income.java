@@ -1,6 +1,7 @@
 package dev.hend.MyMoneyService.income.model;
 
 import java.util.UUID;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "income")
+@Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

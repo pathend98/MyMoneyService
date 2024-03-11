@@ -3,6 +3,7 @@ package dev.hend.MyMoneyService.billpayment.controller;
 import java.util.List;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/bill-payment")
+@CrossOrigin
 public class BillPaymentController {
 
     private final BillPaymentService billPaymentService;
